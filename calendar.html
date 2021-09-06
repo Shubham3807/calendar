@@ -5,12 +5,10 @@
         <meta name="viewport" content="width = device-width, initial-scale = 1.0">
         <link rel="stylesheet" href="./calendar.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     </head>
     <body>
         <!-- select month & year -->
-        <select name="" id="">
+        <select id="select_month" onchange="selectMonth(this);">
             <option value="0">Jan</option>
             <option value="1">Feb</option>
             <option value="2">Mar</option>
@@ -25,10 +23,8 @@
             <option value="11">Dec</option>
         </select>
 
-        <h1>Happy Birthday Nikhit Ma'am</h1>
-        <h2>Wish a great life ahead!!</h2>
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-hhsGpxVcyyxlniyoBnts2MAOI4vp-NKYY8alQHsmqkGmyR5ZCBDnk2FntW6WEh3vsheVCWuM&usqp=CAc" alt="">
-        <h3>i am an intern..will take some time to think differentl</h3>
+        <!-- year selection -->
+        <select name="" id="select_year"></select>
         <!-- js script has been added  -->
         <script src= "./calendar.js"></script>
     </body>
