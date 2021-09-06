@@ -38,7 +38,9 @@ function selectYear(selYear){
     console.log(selectedMonthName);
 
 //to edit chart title - month name & year
-    document.querySelector("#chart_header h1").textContent = selectedMonthName + ", "+ selectedYear;   
+    document.querySelector("#chart_header h1").textContent = selectedMonthName + ", "+ selectedYear; 
+    
+//logic to check whether the year is a leap year or not
 }
 
 
