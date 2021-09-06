@@ -18,3 +18,6 @@ function selectMonth(selMonth){
     console.log(selMonth.options[selMonth.selectedIndex].value);
 }
 
+function selectYear(selYear){
+    console.log(selYear.options[selYear.selectedIndex].value);
+}
