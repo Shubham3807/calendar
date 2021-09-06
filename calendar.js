@@ -4,6 +4,7 @@ var selectedMonth ="";
 var selectedYear = ""
 var firstDate = new Date();
 var firstDay = "";
+var selectedMonthName = "";
 
 //logic to pre populate year selection with options
 window.onload = function(){
@@ -30,7 +31,18 @@ function selectYear(selYear){
     selectedYear = selYear.options[selYear.selectedIndex].value;
     firstDate = new Date(selectedYear,selectedMonth, "01"); 
     firstDay = firstDate.getDay();
+    
+//logic to find out current month name
+    var parts = (firstDate.toString()).split(" ",2);
+    selectedMonthName = parts[1];
+    console.log(selectedMonthName);
+
+//to edit chart title - month name & year
+    document.querySelector("#chart_header h1").textContent = selectedMonthName + ", "+ selectedYear;   
 }
+
+
+
 
 
 
