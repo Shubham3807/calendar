@@ -41,6 +41,8 @@ function selectYear(selYear){
     document.querySelector("#chart_header h1").textContent = selectedMonthName + ", "+ selectedYear; 
     
 //logic to check whether the year is a leap year or not
+ var febDays = (selectedYear % 4 === 0) ? 29 : 28;
+ console.log(febDays);
 }
 
 
