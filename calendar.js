@@ -4,7 +4,7 @@ var selectedMonth ="";
 var selectedYear = ""
 var firstDate = new Date();
 var firstDay = "";
-var selectedMonthName = "";
+var selMonthNm = "";
 
 //logic to pre populate year selection with options
 window.onload = function(){
@@ -34,16 +34,34 @@ function selectYear(selYear){
     
 //logic to find out current month name
     var parts = (firstDate.toString()).split(" ",2);
-    selectedMonthName = parts[1];
-    console.log(selectedMonthName);
+    selMonthNm = parts[1];
+    console.log(selMonthNm);
 
 //to edit chart title - month name & year
-    document.querySelector("#chart_header h1").textContent = selectedMonthName + ", "+ selectedYear; 
+    document.querySelector("#chart_header h1").textContent = selMonthNm + ", "+ selectedYear; 
     
 //logic to check whether the year is a leap year or not
  var febDays = (selectedYear % 4 === 0) ? 29 : 28;
  console.log(febDays);
-}
+
+ //logic to find days count 
+ 
+ var daysCount = 0;
+ if(firstDate.getMonth() == 1){
+     daysCount = febDays;
+ }
+ else if(firstDate.getMonth() == 3 ||firstDate.getMonth() == 5 ||firstDate.getMonth() == 8 ||firstDate.getMonth() == 10){
+    daysCount = 30;
+ }
+ else{
+     daysCount = 31;
+ }
+
+ console.log(daysCount);
+
+
+}//closeing of function
+
 
 
 
