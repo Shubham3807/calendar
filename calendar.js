@@ -2,7 +2,7 @@ console.log("connection ok");
 //global variables
 var firstDate = new Date();
 var selectedMonth = firstDate.getMonth() ;
-var selectedYear = "2021";
+var selectedYear = firstDate.getFullYear();
 var firstDay = "";
 var selMonthNm = "";
 
@@ -19,10 +19,9 @@ window.onload = function(){
         option.value = i;
         selectYr.appendChild(option);
     }
-  
-    
 }
 
+//onChangeHandler
 function selectHandler(selThis){
     if((selThis.getAttribute("name"))==="select_month"){
         selectedMonth = selThis.options[selThis.selectedIndex].value;
@@ -35,69 +34,81 @@ function selectHandler(selThis){
     firstDay = firstDate.getDay();
     
     
-//logic to find out current month name
-    var parts = (firstDate.toString()).split(" ",2);
-    selMonthNm = parts[1];
-    console.log(selMonthNm);
+//to find out current month name
+    curMonthName();
+
 
 //to edit chart title - month name & year
     document.querySelector("#chart_header h3").textContent = selMonthNm + ", "+ selectedYear; 
+
     
-//logic to check whether the year is a leap year or not
+//to check whether the year is a leap year or not
  var febDays = (selectedYear % 4 === 0) ? 29 : 28;
  console.log(febDays);
 
- //logic to find days count 
+ //to find days count 
+ var daysCnt = daysCount(febDays);
+
+ //to fill numbers in calendar
  
- var daysCount = 0;
+fillDates(daysCnt);
+}//closeing of changeHandler
+
+
+
+
+//logic to find current month name
+function curMonthName(){
+    var parts = (firstDate.toString()).split(" ",2);
+    selMonthNm = parts[1];
+    console.log(selMonthNm);
+}//end curMonthName()
+
+
+//logic to find days count
+function daysCount(febDays){
+    var daysCnt = 0;
  if(firstDate.getMonth() == 1){
-     daysCount = febDays;
+     return daysCnt = febDays;
  }
  else if(firstDate.getMonth() == 3 ||firstDate.getMonth() == 5 ||firstDate.getMonth() == 8 ||firstDate.getMonth() == 10){
-    daysCount = 30;
+    return daysCnt = 30;
  }
  else{
-     daysCount = 31;
+     return daysCnt = 31;
  }
 
- console.log(daysCount);
+}//end daysCount()
 
- //logic to fill numbers in calendar
- 
- var tbRows = document.querySelectorAll(".tr_body");
- var cpFirstDay = firstDay;
- var days = 1;
- 
- for(let i=0; i < tbRows.length ; i++){
-
-    let tbTd = tbRows[i].querySelectorAll("td");
+//logic to fill dates in calendar
+function fillDates(daysCnt) {
+    var tbRows = document.querySelectorAll(".tr_body");
+    var cpFirstDay = firstDay;
+    var days = 1;
     
-    for(let j = 0 ; j < tbTd.length ; j++){
-        tbTd[j].innerHTML = "";
+    for(let i=0; i < tbRows.length ; i++){
+   
+       let tbTd = tbRows[i].querySelectorAll("td");
+       
+       for(let j = 0 ; j < tbTd.length ; j++){
+           tbTd[j].innerHTML = "";
+       }
     }
- }
- for(let i=0; i < tbRows.length ; i++){
-
-    let tbTd = tbRows[i].querySelectorAll("td");
-    
-    for(let j = cpFirstDay ; j < tbTd.length ; j++){
-        tbTd[j].innerHTML = "";
-        if(days > daysCount){
-            break;
-        }
-        else{
-            tbTd[j].innerHTML = days;
-            days++;  
-        }
-        cpFirstDay = 0;
+   
+    for(let i=0; i < tbRows.length ; i++){
+   
+       let tbTd = tbRows[i].querySelectorAll("td");
+       
+       for(let j = cpFirstDay ; j < tbTd.length ; j++){
+           tbTd[j].innerHTML = "";
+           if(days > daysCnt){
+               break;
+           }
+           else{
+               tbTd[j].innerHTML = days;
+               days++;  
+           }
+           cpFirstDay = 0;
+       }
     }
- }
-
-}//closeing of function
-
-
-
-
-
-
-
+   }//end fillDates()

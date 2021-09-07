@@ -42,3 +42,7 @@ console.log(new Date("2021-09-06"));
 console.log((new Date("2021-09-06")).getDay());
 console.log(new Date("2021-09-05"));
 console.log((new Date("2021-09-05")).getDay());
+
+
+
+
