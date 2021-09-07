@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="description" content="implement js, css & html">
+        <meta name="viewport" content="width = device-width, initial-scale = 1.0">
+        <link rel="stylesheet" href="./calendar.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+    </head>
+    <body>
+        <!-- select month & year -->
+        <select id="select_month" onchange="selectMonth(this);">
+            <option value="0">Jan</option>
+            <option value="01">Feb</option>
+            <option value="02">Mar</option>
+            <option value="03">Apr</option>
+            <option value="04">May</option>
+            <option value="05">Jun</option>
+            <option value="06">Jul</option>
+            <option value="07">Aug</option>
+            <option value="08">Sep</option>
+            <option value="09">Oct</option>
+            <option value="10">Nov</option>
+            <option value="11">Dec</option>
+        </select>
+
+        <!-- year selection -->
+        <select name="" id="select_year" onchange = "selectYear(this);"></select>
+
+        <!-- month chart -->
+        <div class="flex_container">
+            <div><h1>Sep, 2021</h1></div>
+            <table class="tb_month">
+                <thead class="tb_head">
+                    <tr class ="tr_head">
+                        <td>Mon</td>
+                        <td>Tue</td>
+                        <td>Wed</td>
+                        <td>Thu</td>
+                        <td>Fri</td>
+                        <td>Sat</td>
+                        <td>Sun</td>
+                    </tr>
+                </thead>
+                <tbody class="tb_body">
+                    <!-- row 1 -->
+                    <tr class=tr_body>
+                        <td>123</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <!-- row 2 -->
+                    <tr class=tr_body>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <!-- row  3-->
+                    <tr class=tr_body>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <!-- row  4-->
+                    <tr class=tr_body>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <!-- row  5-->
+                    <tr class=tr_body>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <!-- row  6-->
+                    <tr class=tr_body>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+      
+        <!-- js script has been added  -->
+        <script src= "./test.js"></script>
+    </body>
+</html> 
