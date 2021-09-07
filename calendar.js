@@ -1,10 +1,11 @@
 console.log("connection ok");
 //global variables
-var selectedMonth ="";
-var selectedYear = ""
 var firstDate = new Date();
+var selectedMonth = firstDate.getMonth() ;
+var selectedYear = "2021";
 var firstDay = "";
 var selMonthNm = "";
+
 
 //logic to pre populate year selection with options
 window.onload = function(){
@@ -12,24 +13,24 @@ window.onload = function(){
     var selectYr = document.getElementById("select_year");
     var curYear = (new Date()).getFullYear();
     
-    for(var i= 1950; i<=curYear; i++){
+    for(var i= curYear; i<=(curYear + 30); i++){
         var option = document.createElement("OPTION");
         option.innerHTML = i;
         option.value = i;
         selectYr.appendChild(option);
     }
-}
-//logic to access month & year selected by user
-function selectMonth(selMonth){
-    // console.log(selMonth.options[selMonth.selectedIndex].value);
-    selectedMonth = selMonth.options[selMonth.selectedIndex].value;
-    alert("Please Select Year!");
-
+  
+    
 }
 
-function selectYear(selYear){
-    console.log(selYear.options[selYear.selectedIndex].value);
-    selectedYear = selYear.options[selYear.selectedIndex].value;
+function selectHandler(selThis){
+    if((selThis.getAttribute("name"))==="select_month"){
+        selectedMonth = selThis.options[selThis.selectedIndex].value;
+    }
+    if((selThis.getAttribute("name"))==="select_year"){
+        selectedYear = selThis.options[selThis.selectedIndex].value;
+    }
+    
     firstDate = new Date(selectedYear,selectedMonth, "01"); 
     firstDay = firstDate.getDay();
     
