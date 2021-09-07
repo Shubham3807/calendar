@@ -25,3 +25,10 @@ body{
     text-align: center;
 }
 
+td:first-child{
+    color : red;
+}
+
+.chart_header h1{
+    text-align : center;
+} 

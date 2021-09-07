@@ -21,8 +21,9 @@ window.onload = function(){
 }
 //logic to access month & year selected by user
 function selectMonth(selMonth){
-    console.log(selMonth.options[selMonth.selectedIndex].value);
+    // console.log(selMonth.options[selMonth.selectedIndex].value);
     selectedMonth = selMonth.options[selMonth.selectedIndex].value;
+    alert("Please Select Year!");
 
 }
 
@@ -31,6 +32,7 @@ function selectYear(selYear){
     selectedYear = selYear.options[selYear.selectedIndex].value;
     firstDate = new Date(selectedYear,selectedMonth, "01"); 
     firstDay = firstDate.getDay();
+    
     
 //logic to find out current month name
     var parts = (firstDate.toString()).split(" ",2);
@@ -59,6 +61,36 @@ function selectYear(selYear){
 
  console.log(daysCount);
 
+ //logic to fill numbers in calendar
+ 
+ var tbRows = document.querySelectorAll(".tr_body");
+ var cpFirstDay = firstDay;
+ var days = 1;
+ 
+ for(let i=0; i < tbRows.length ; i++){
+
+    let tbTd = tbRows[i].querySelectorAll("td");
+    
+    for(let j = 0 ; j < tbTd.length ; j++){
+        tbTd[j].innerHTML = "";
+    }
+ }
+ for(let i=0; i < tbRows.length ; i++){
+
+    let tbTd = tbRows[i].querySelectorAll("td");
+    
+    for(let j = cpFirstDay ; j < tbTd.length ; j++){
+        tbTd[j].innerHTML = "";
+        if(days > daysCount){
+            break;
+        }
+        else{
+            tbTd[j].innerHTML = days;
+            days++;  
+        }
+        cpFirstDay = 0;
+    }
+ }
 
 }//closeing of function
 
