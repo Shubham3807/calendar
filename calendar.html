@@ -5,30 +5,43 @@
         <meta name="viewport" content="width = device-width, initial-scale = 1.0">
         <link rel="stylesheet" href="./calendar.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     </head>
     <body>
-        <!-- select month & year -->
-        <select name="select_month" id="select_month" onchange="selectMonth(this);">
-            <option value="0">Jan</option>
-            <option value="01">Feb</option>
-            <option value="02">Mar</option>
-            <option value="03">Apr</option>
-            <option value="04">May</option>
-            <option value="05">Jun</option>
-            <option value="06">Jul</option>
-            <option value="07">Aug</option>
-            <option value="08">Sep</option>
-            <option value="09">Oct</option>
-            <option value="10">Nov</option>
-            <option value="11">Dec</option>
-        </select>
+        <div id= "contain_select">
+             <!-- select month & year -->
+        <div id="contain_select_m">
+            <label for="select_month">Month</label>
+            <select name="select_month" id="select_month" onchange="selectMonth(this);">
+                <option value="0">Jan</option>
+                <option value="01">Feb</option>
+                <option value="02">Mar</option>
+                <option value="03">Apr</option>
+                <option value="04">May</option>
+                <option value="05">Jun</option>
+                <option value="06">Jul</option>
+                <option value="07">Aug</option>
+                <option value="08">Sep</option>
+                <option value="09">Oct</option>
+                <option value="10">Nov</option>
+                <option value="11">Dec</option>
+            </select>
+            </div>
+        
+            <!-- year selection -->
+            <div id="contain_select_y">
+                <label for="select_year">Year</label>
+                <select name="select_year"  id="select_year" onchange = "selectYear(this);"></select>
+            </div>
 
-        <!-- year selection -->
-        <select name="select_year"  id="select_year" onchange = "selectYear(this);"></select>
+        </div>
+       
+       
 
         <!-- month chart -->
         <div class="flex_container">
-            <div id="chart_header"><h1>CALENDAR</h1></div>
+            <div id="chart_header"><h3>CALENDAR</h3></div>
             <table class="tb_month">
                 <thead class="tb_head">
                     <tr class ="tr_head">

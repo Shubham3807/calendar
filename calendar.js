@@ -40,7 +40,7 @@ function selectYear(selYear){
     console.log(selMonthNm);
 
 //to edit chart title - month name & year
-    document.querySelector("#chart_header h1").textContent = selMonthNm + ", "+ selectedYear; 
+    document.querySelector("#chart_header h3").textContent = selMonthNm + ", "+ selectedYear; 
     
 //logic to check whether the year is a leap year or not
  var febDays = (selectedYear % 4 === 0) ? 29 : 28;
