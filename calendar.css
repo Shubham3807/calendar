@@ -54,5 +54,27 @@ td:first-child{
     color : red;
 }
 
-
 /* end  */
+
+/* modal styling */
+.contain_reminder{
+    border:1px solid gray;
+    width:fit-content;
+}
+h4{
+    background-color: rgb(136, 247, 136);
+    width:50vh;
+}
+.form_add_event{
+    margin-top:-25px;
+    /* border:2px solid gray; */
+    width:50vh;
+    height:auto;  
+}
+
+.form_add_event *{
+    width:100%;
+    margin-top:5px;
+    margin-bottom:5px;
+}
+
