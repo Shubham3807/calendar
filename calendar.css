@@ -59,7 +59,7 @@ td:first-child{
 /* modal styling */
 
 .outermost_contain_rem{
-  display:none;/* Hidden by default */
+  /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
   padding-top: 100px; /* Location of the box */
