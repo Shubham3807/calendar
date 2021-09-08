@@ -52,10 +52,13 @@ function selectHandler(selThis){
  //to fill numbers in calendar
  
 fillDates(daysCnt);
+
+//add dblclick event to each filled td
+addDblEvent();
 }//closeing of changeHandler
 
 
-
+// FUNCTIONS ARE CODED DOWN BELOW
 
 //logic to find current month name
 function curMonthName(){
@@ -113,4 +116,24 @@ function fillDates(daysCnt) {
     }
    }//end fillDates()
 
-   
+//logic to add dblClick event to each filled td
+function addDblEvent(){
+    var tbRows = document.querySelectorAll(".tr_body");
+    console.log(tbRows);
+    var trTd = [];
+    
+    for(let i=0; i< tbRows.length; i++){
+        trTd[i] = tbRows[i].querySelectorAll("td");
+        console.log(trTd[i]);
+    }
+
+    for(let i = 0; i< trTd.length; i++){
+        for(let j=0; j < trTd[i].length ; j++){
+            if(trTd[i][j].textContent != ""){
+                trTd[i][j].addEventListener("dblclick",function(){
+                    alert("dbl event added successfully");
+                })
+            }
+        }
+    }
+}
