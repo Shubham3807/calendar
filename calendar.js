@@ -57,6 +57,11 @@ fillDates(daysCnt);
 addDblEvent();
 }//closeing of changeHandler
 
+//onClickClose handler
+function onClickClose(clickThis){
+    document.querySelector(".modal").style.display = "none";
+}
+
 
 // FUNCTIONS ARE CODED DOWN BELOW
 
@@ -103,7 +108,7 @@ function fillDates(daysCnt) {
        let tbTd = tbRows[i].querySelectorAll("td");
        
        for(let j = cpFirstDay ; j < tbTd.length ; j++){
-           tbTd[j].innerHTML = "";
+           tbTd[j].textContent = "";
            if(days > daysCnt){
                break;
            }
