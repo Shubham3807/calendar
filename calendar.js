@@ -7,18 +7,28 @@ var firstDay = "";
 var selMonthNm = "";
 
 
-//logic to pre populate year selection with options
+//logic to pre populate year selection with options & table rows with td
 window.onload = function(){
     console.log("test onload");
     var selectYr = document.getElementById("select_year");
     var curYear = (new Date()).getFullYear();
     
-    for(var i= curYear; i<=(curYear + 30); i++){
-        var option = document.createElement("OPTION");
+    for(let i= curYear; i<=(curYear + 30); i++){
+        let option = document.createElement("OPTION");
         option.innerHTML = i;
         option.value = i;
         selectYr.appendChild(option);
     }
+
+    var tbRows = document.querySelectorAll(".tr_body");
+    console.log(tbRows);
+    for(let i=0; i < tbRows.length; i++){
+        for(let j=0; j<7; j++){
+            let td = document.createElement("TD");
+            tbRows[i].appendChild(td);
+        }
+    }
+
 }
 
 //onChangeHandler
