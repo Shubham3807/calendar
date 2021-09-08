@@ -131,7 +131,7 @@ function addDblEvent(){
         for(let j=0; j < trTd[i].length ; j++){
             if(trTd[i][j].textContent != ""){
                 trTd[i][j].addEventListener("dblclick",function(){
-                    alert("dbl event added successfully");
+                    document.querySelector(".modal").style.display = "block";
                 })
             }
         }
