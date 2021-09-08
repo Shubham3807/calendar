@@ -25,11 +25,13 @@ window.onload = function(){
     for(let i=0; i < tbRows.length; i++){
         for(let j=0; j<7; j++){
             let td = document.createElement("TD");
+            console.log(i +" "+ j );
             tbRows[i].appendChild(td);
         }
     }
 
 }
+
 
 //onChangeHandler
 function selectHandler(selThis){
@@ -72,7 +74,7 @@ function onClickClose(clickThis){
     document.querySelector(".modal").style.display = "none";
 }
 
-
+// /////////////////////////////////////////////////////////////////
 // FUNCTIONS ARE CODED DOWN BELOW
 
 //logic to find current month name
@@ -151,4 +153,6 @@ function addDblEvent(){
             }
         }
     }
-}
+}//logic end addDblEvent
+
+//
