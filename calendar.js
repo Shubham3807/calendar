@@ -157,4 +157,37 @@ function addDblEvent(){
     }
 }//logic end addDblEvent
 
-//
+// LOGIC createEventHandler()
+
+// console.log(localStorage.length);
+// localStorage.clear();
+// console.log(localStorage.length);
+ if(typeof(Storage) != "undefined"){
+     if(!localStorage.eventKey){
+        localStorage.eventKey = "0";
+        localStorage.setItem("eventList", "[]");
+     }
+ }
+else{
+    alert("sorry! no support of localStorage.");
+}
+
+function createEventHandler(){
+
+var eventList = JSON.parse(localStorage.eventList);
+eventList[Number(localStorage.eventKey)] = {
+    "eventKey" : localStorage.eventKey,
+    "createdOn" : document.querySelector(".hold_date").textContent,
+    "title": document.querySelector("#event_title").getAttribute("value"),
+    "desc" : document.querySelector("#event_desc").getAttribute("value")
+};
+
+localStorage.eventList = JSON.stringify(eventList);
+localStorage.eventKey = Number(localStorage.eventKey) + 1;
+console.log(localStorage.eventList);
+console.log(localStorage.eventKey);
+
+document.querySelector("#event_title").setAttribute("value", "");
+document.querySelector("#event_desc").setAttribute("value", "");
+}
+

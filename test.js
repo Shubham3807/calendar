@@ -93,13 +93,20 @@
 // console.log(typeof(objArr.name));
 
 // localStorage.clear();
-localStorage.setItem("arr", "[]");
-var arr = JSON.parse(localStorage.arr);
-arr[0] = "Shubham";
-localStorage.arr = JSON.stringify(arr);
-arr[1] = "Krishna";
-localStorage.arr = JSON.stringify(arr);
+// localStorage.setItem("arr", "[]");
+// var arr = JSON.parse(localStorage.arr);
+// arr[0] = "Shubham";
+// localStorage.arr = JSON.stringify(arr);
+// arr[1] = "Krishna";
+// localStorage.arr = JSON.stringify(arr);
 
-var testArr = JSON.parse(localStorage.arr);
-console.log(testArr[0]);
-console.log(testArr[1]);
+// var testArr = JSON.parse(localStorage.arr);
+// console.log(testArr[0]);
+// console.log(testArr[1]);
+
+//LOGIC to read value from input field
+// console.log(document.querySelector("#testInput").getAttribute("value"));
+// console.log(document.querySelector("#testTextarea").getAttribute("value"));
+document.querySelector("#testInput").addEventListener("onchange" ,function(){
+    console.log("check success");
+});
