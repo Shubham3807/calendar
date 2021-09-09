@@ -9,7 +9,7 @@ var selMonthNm = "";
 
 //logic to pre populate year selection with options & table rows with td
 window.onload = function(){
-    console.log("test onload");
+    console.log("test onload : success");
     var selectYr = document.getElementById("select_year");
     var curYear = (new Date()).getFullYear();
     
@@ -21,7 +21,7 @@ window.onload = function(){
     }
 
     var tbRows = document.querySelectorAll(".tr_body");
-    console.log(tbRows);
+    // console.log(tbRows);
     for(let i=0; i < tbRows.length; i++){
         for(let j=0; j<7; j++){
             let td = document.createElement("TD");
@@ -71,6 +71,8 @@ addDblEvent();
 
 //onClickClose handler
 function onClickClose(clickThis){
+    document.querySelector("#event_title").value="";
+    document.querySelector("#event_desc").value="";
     document.querySelector(".modal").style.display = "none";
 }
 
@@ -178,8 +180,8 @@ var eventList = JSON.parse(localStorage.eventList);
 eventList[Number(localStorage.eventKey)] = {
     "eventKey" : localStorage.eventKey,
     "createdOn" : document.querySelector(".hold_date").textContent,
-    "title": document.querySelector("#event_title").getAttribute("value"),
-    "desc" : document.querySelector("#event_desc").getAttribute("value")
+    "title": document.querySelector("#event_title").value,
+    "desc" : document.querySelector("#event_desc").value
 };
 
 localStorage.eventList = JSON.stringify(eventList);
@@ -187,7 +189,9 @@ localStorage.eventKey = Number(localStorage.eventKey) + 1;
 console.log(localStorage.eventList);
 console.log(localStorage.eventKey);
 
-document.querySelector("#event_title").setAttribute("value", "");
-document.querySelector("#event_desc").setAttribute("value", "");
+document.querySelector("#event_title").value="";
+document.querySelector("#event_desc").value="";
+document.querySelector(".modal").style.display = "none";
 }
 
+//END OF createEventHandler
