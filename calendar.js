@@ -67,6 +67,8 @@ fillDates(daysCnt);
 
 //add dblclick event to each filled td
 addDblEvent();
+
+fillEventsInTd();
 }//closeing of changeHandler
 
 //onClickClose handler
@@ -151,7 +153,7 @@ function addDblEvent(){
             if(trTd[i][j].textContent != ""){
                 trTd[i][j].addEventListener("dblclick",function(){
                     document.querySelector(".modal").style.display = "block";
-                    document.querySelector(".hold_date").textContent= Date( selectedYear,selectedMonth, trTd[i][j].textContent);
+                    document.querySelector(".hold_date").textContent = new Date( selectedYear,selectedMonth, trTd[i][j].textContent).toLocaleDateString();
                     console.log(document.querySelector(".hold_date").textContent); 
                 })
             }
@@ -195,3 +197,19 @@ document.querySelector(".modal").style.display = "none";
 }
 
 //END OF createEventHandler
+
+//LOGIC to fill events in each td
+function fillEventsInTd(){
+    var tbRows = document.querySelectorAll(".tr_body");
+    var trTd  = [];
+    for(let i=0; i< tbRows.length; i++){
+        trTd[i]= tbRows[i].querySelectorAll("td");
+    }
+    var count = 0;
+    for(let i=0; i< tbRows.length; i++){
+        for(let j=0 ; j<trTd[i].length; j++ ){
+            count++;
+        }
+    }
+    console.log(count);
+}
