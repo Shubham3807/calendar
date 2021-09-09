@@ -25,7 +25,7 @@ window.onload = function(){
     for(let i=0; i < tbRows.length; i++){
         for(let j=0; j<7; j++){
             let td = document.createElement("TD");
-            console.log(i +" "+ j );
+            // console.log(i +" "+ j );
             tbRows[i].appendChild(td);
         }
     }
@@ -149,6 +149,8 @@ function addDblEvent(){
             if(trTd[i][j].textContent != ""){
                 trTd[i][j].addEventListener("dblclick",function(){
                     document.querySelector(".modal").style.display = "block";
+                    document.querySelector(".hold_date").textContent= Date( selectedYear,selectedMonth, trTd[i][j].textContent);
+                    console.log(document.querySelector(".hold_date").textContent); 
                 })
             }
         }
