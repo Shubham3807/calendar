@@ -215,17 +215,16 @@ function fillEventsInTd(){
             if(trTd[i][j].textContent !== ""){
                 let curDate = new Date(selectedYear, selectedMonth,trTd[i][j].textContent ).toLocaleDateString();
                 // console.log(curDate);
-                let countEvents = 0;
+                // let countEvents = 0;
                 for(let k = 0; k< eventList.length; k++){
                     if(curDate === eventList[k].createdOn){
-                        countEvents++;
+                        // countEvents++;
+                        trTd[i][j].innerHTML += "<td><br><span style='color : blue'><b>("+ eventList[k].title + ")</b></span></td>";
                     }
                  }
-                    if(countEvents){
-                        // trTd[i][j].textContent += "    "+ countEvents + " events";
-                        trTd[i][j].innerHTML += "<td><br><span style='color : blue'><b>("+ countEvents + ")</b></span></td>";
-                        // alert("you have created "+ countEvents + " events on "+curDate);
-                    }
+                    // if(countEvents){
+                    //     trTd[i][j].innerHTML += "<td><br><span style='color : blue'><b>("+ countEvents + ")</b></span></td>";
+                    // }
                 countEvents=0;
                 
             }
