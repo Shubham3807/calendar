@@ -200,16 +200,36 @@ document.querySelector(".modal").style.display = "none";
 
 //LOGIC to fill events in each td
 function fillEventsInTd(){
+    // console.log("inside fillEventsInTd")
+    var eventList = JSON.parse(localStorage.eventList);
+    // console.log(eventList[0].createdOn);
+     console.log(eventList);
     var tbRows = document.querySelectorAll(".tr_body");
     var trTd  = [];
     for(let i=0; i< tbRows.length; i++){
         trTd[i]= tbRows[i].querySelectorAll("td");
     }
-    var count = 0;
+    
     for(let i=0; i< tbRows.length; i++){
         for(let j=0 ; j<trTd[i].length; j++ ){
-            count++;
+            if(trTd[i][j].textContent !== ""){
+                let curDate = new Date(selectedYear, selectedMonth,trTd[i][j].textContent ).toLocaleDateString();
+                // console.log(curDate);
+                let countEvents = 0;
+                for(let k = 0; k< eventList.length; k++){
+                    if(curDate === eventList[k].createdOn){
+                        countEvents++;
+                    }
+                 }
+                    if(countEvents){
+                        // trTd[i][j].textContent += "    "+ countEvents + " events";
+                        trTd[i][j].innerHTML += "<td><br><span style='color : blue'><b>("+ countEvents + ")</b></span></td>";
+                        // alert("you have created "+ countEvents + " events on "+curDate);
+                    }
+                countEvents=0;
+                
+            }
         }
     }
-    console.log(count);
-}
+    
+}//END logic of fillEventsInTd()
