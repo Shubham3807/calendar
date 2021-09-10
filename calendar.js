@@ -56,7 +56,6 @@ function selectHandler(selThis){
     
 //to check whether the year is a leap year or not
  var febDays = (selectedYear % 4 === 0) ? 29 : 28;
- console.log(febDays);
 
  //to find days count 
  var daysCnt = daysCount(febDays);
@@ -95,7 +94,6 @@ function onClickCloseE(clickThis){
 function curMonthName(){
     var parts = (firstDate.toString()).split(" ",2);
     selMonthNm = parts[1];
-    console.log(selMonthNm);
 }//end curMonthName()
 
 
@@ -150,12 +148,10 @@ function fillDates(daysCnt) {
 //logic to add dblClick event to each filled td
 function addDblEvent(){
     var tbRows = document.querySelectorAll(".tr_body");
-    console.log(tbRows);
     var trTd = [];
     
     for(let i=0; i< tbRows.length; i++){
         trTd[i] = tbRows[i].querySelectorAll("td");
-        console.log(trTd[i]);
     }
 
     for(let i = 0; i< trTd.length; i++){
@@ -205,7 +201,6 @@ document.querySelector("#event_title").value="";
 document.querySelector("#event_desc").value="";
 document.querySelector(".modal").style.display = "none";
 
-fillEventsInTd();
 }
 
 //END OF createEventHandler
@@ -215,7 +210,7 @@ function fillEventsInTd(){
     // console.log("inside fillEventsInTd")
     var eventList = JSON.parse(localStorage.eventList);
     // console.log(eventList[0].createdOn);
-     console.log(eventList);
+    
     var tbRows = document.querySelectorAll(".tr_body");
     var trTd  = [];
     for(let i=0; i< tbRows.length; i++){
@@ -300,18 +295,8 @@ function editEventHandler(){
 function removeEventHandler(){
     let eventKey = document.querySelector("#hold_event_key").textContent;
     let copyEventList = JSON.parse(localStorage.eventList);
-    console.log(copyEventList);
-    let newEventList = [];
-
-    for (let i=0; i< copyEventList.length;i++){
-        console.log(copyEventList[i].eventKey);
-        if(eventKey !== copyEventList[i].eventKey ){
-            newEventList.push(copyEventList[i]);
-        }
-    }
-    console.log(newEventList);
+    let newEventList = copyEventList.filter(i=>i.eventKey != eventKey);
     localStorage.eventList = JSON.stringify(newEventList);
-    console.log(localStorage.eventList);
     document.querySelector(".modal_e").style.display = "none";   
 }
 //END LOGIC removeEventHandler
