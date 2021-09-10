@@ -56,7 +56,7 @@ var febDays = (selectedYear % 4 === 0) ? 29 : 28;
 
 //to find days count 
 var daysCnt = daysCount(febDays);
-
+daysCountGlobal = daysCnt;
 //to fill numbers in calendar 
 fillDates(daysCnt);
 
@@ -171,9 +171,9 @@ function addDblEvent(){
     }
 }//--------------------------------------logic end addDblEvent
 
-console.log(localStorage.length);
-localStorage.clear();
-console.log(localStorage.length);
+// console.log(localStorage.length);
+// localStorage.clear();
+// console.log(localStorage.length);
 if(typeof(Storage) != "undefined"){
     if(!localStorage.eventKey){
        localStorage.eventKey = "0";
@@ -198,13 +198,10 @@ eventList[Number(localStorage.eventKey)] = {
 
 localStorage.eventList = JSON.stringify(eventList);
 localStorage.eventKey = Number(localStorage.eventKey) + 1;
-console.log(localStorage.eventList);
-console.log(localStorage.eventKey);
 
 document.querySelector("#event_title").value="";
 document.querySelector("#event_desc").value="";
 document.querySelector(".modal").style.display = "none";
-
 
 }
 
@@ -214,10 +211,7 @@ document.querySelector(".modal").style.display = "none";
 
 //----------------------------------LOGIC to fill events in each td
 function fillEventsInTd(){
-    // console.log("inside fillEventsInTd")
     var eventList = JSON.parse(localStorage.eventList);
-    // console.log(eventList[0].createdOn);
-    
     var tbRows = document.querySelectorAll(".tr_body");
     var trTd  = [];
     for(let i=0; i< tbRows.length; i++){
