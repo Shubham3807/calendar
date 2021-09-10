@@ -62,8 +62,10 @@ fillDates(daysCnt);
 
 //add dblclick event to each filled td
 addDblEvent();
+if(localStorage.eventKey != 0){
+    fillEventsInTd();
+}
 
-fillEventsInTd();
 
 // to add edit modal with each event title
 modalToEvent();
@@ -203,6 +205,7 @@ document.querySelector("#event_title").value="";
 document.querySelector("#event_desc").value="";
 document.querySelector(".modal").style.display = "none";
 
+
 }
 
 //-----------------------------------END OF createEventHandler
@@ -240,8 +243,6 @@ function fillEventsInTd(){
 
 //------------------------------------LOGIC modalToEvent()
 function modalToEvent(){
-    console.log(document.querySelectorAll(".td_event_title"));
-
     let event_titles = document.querySelectorAll(".td_event_title");
     for(let i =0 ; i< event_titles.length; i++){
         event_titles[i].addEventListener("click",function(){
@@ -297,6 +298,7 @@ function removeEventHandler(){
     let copyEventList = JSON.parse(localStorage.eventList);
     let newEventList = copyEventList.filter(i=>i.eventKey != eventKey);
     localStorage.eventList = JSON.stringify(newEventList);
+    localStorage.eventKey = Number(localStorage.eventKey)-1;
     document.querySelector(".modal_e").style.display = "none";   
 }
 //END---------------------------- LOGIC removeEventHandler
