@@ -70,16 +70,10 @@ addDblEvent();
 
 fillEventsInTd();
 
-console.log(document.querySelectorAll(".td_event_title"));
 
+// to add edit modal with each event title
+modalToEvent();
 
-let event_titles = document.querySelectorAll(".td_event_title");
-for(let i =0 ; i< event_titles.length; i++){
-    event_titles[i].addEventListener("click",function(){
-            console.log(event_titles[i]);
-            document.querySelector(".modal_e").style.display = "block";
-        });
-}
 }//closeing of changeHandler
 
 //onClickClose handler
@@ -87,6 +81,11 @@ function onClickClose(clickThis){
     document.querySelector("#event_title").value="";
     document.querySelector("#event_desc").value="";
     document.querySelector(".modal").style.display = "none";
+}
+function onClickCloseE(clickThis){
+    document.querySelector("#event_title").value="";
+    document.querySelector("#event_desc").value="";
+    document.querySelector(".modal_e").style.display = "none";
 }
 
 // /////////////////////////////////////////////////////////////////
@@ -230,7 +229,7 @@ function fillEventsInTd(){
                 for(let k = 0; k< eventList.length; k++){
                     if(curDate === eventList[k].createdOn){
                         // countEvents++;
-                        trTd[i][j].innerHTML += "<td><p class='td_event_title'>"+ eventList[k].title.substr(0,10)+"..." +"<b style = 'display:none'>"+eventList[k].eventKey+"</b></p></td>";
+                        trTd[i][j].innerHTML += "<td><p class='td_event_title'>"+ eventList[k].title.substr(0,10)+"..." +"<b class='contain_key' style = 'display:none'>"+eventList[k].eventKey+"</b></p></td>";
                     }
                  }
                     // if(countEvents){
@@ -244,3 +243,29 @@ function fillEventsInTd(){
     
 }//END logic of fillEventsInTd()
 
+//LOGIC modalToEvent()
+function modalToEvent(){
+    console.log(document.querySelectorAll(".td_event_title"));
+
+    let event_titles = document.querySelectorAll(".td_event_title");
+    for(let i =0 ; i< event_titles.length; i++){
+        event_titles[i].addEventListener("click",function(){
+                console.log(event_titles[i]);
+                document.querySelector(".modal_e").style.display = "block";
+                console.log(event_titles[i].querySelector(".contain_key").textContent);
+                let eventKey = event_titles[i].querySelector(".contain_key").textContent;
+                //reading data from localStorage for filling fields in edit modal window
+                let eventList = JSON.parse(localStorage.eventList);
+                for(let j=0; j< eventList.length; j++)
+                {
+                    if(eventKey === eventList[j].eventKey){
+                        console.log("match found ");
+                        console.log(document.querySelector("#event_title_e"));
+                        document.querySelector("#event_title_e").value = eventList[j].title;
+                        document.querySelector("#event_desc_e").value = eventList[j].desc;
+                        break;
+                    }
+                }
+            });
+    }   
+}//END logic of modal event
