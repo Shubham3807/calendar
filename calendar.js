@@ -261,6 +261,7 @@ function modalToEvent(){
                     if(eventKey === eventList[j].eventKey){
                         console.log("match found ");
                         console.log(document.querySelector("#event_title_e"));
+                        document.querySelector("#hold_event_key").textContent = eventList[j].eventKey;
                         document.querySelector("#event_title_e").value = eventList[j].title;
                         document.querySelector("#event_desc_e").value = eventList[j].desc;
                         break;
@@ -268,4 +269,27 @@ function modalToEvent(){
                 }
             });
     }   
-}//END logic of modal event
+}//END logic of modalToEvent
+
+//LOGIC editEventHandler()
+function editEventHandler(){
+    console.log("inside editEventHandler");
+    let eventKey = document.querySelector("#hold_event_key").textContent;
+    console.log(eventKey);
+    let eventList = JSON.parse(localStorage.eventList);
+    console.log(eventList);
+    for(let i=0; i< eventList.length;i++){
+        if(eventKey === eventList[i].eventKey){
+            eventList[i].title = document.querySelector("#event_title_e").value;
+            eventList[i].desc = document.querySelector("#event_desc_e").value;
+            break;
+        }
+    }
+
+    localStorage.eventList = JSON.stringify(eventList);
+  
+    document.querySelector("#event_title_e").value="";
+    document.querySelector("#event_desc_e").value="";
+    document.querySelector(".modal_e").style.display = "none";    
+
+}//END logic of editEventHandler()

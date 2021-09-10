@@ -89,11 +89,11 @@
         <div class="modal_e">
             <div class="modal_content">
                 <p>Edit Event<span class="close" onclick="onClickCloseE(this);">X</span></p><br>
-                <!-- below para to hold present date -->
-                <!-- <p class="hold_date" style="display:none"></p> -->
+                <!-- below para to hold eventKey -->
+                <p id="hold_event_key" style="display:none"></p>
                 <input id="event_title_e" type="text" placeholder="Title" value="" required><br>
                 <textarea id="event_desc_e" name="event_desc" cols="30" rows="10"  placeholder="Description" value=""></textarea><br>
-                <input id="edit_event" type = "button" value="Edit">
+                <input id="edit_event" type = "button" value="Edit" onclick="editEventHandler();">
                 <input id="remove_event" type = "button" value="Remove">
                 <input id="close_modal"type="button" value="Close"; onclick="onClickCloseE(this);">
             </div>
