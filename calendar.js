@@ -204,6 +204,8 @@ console.log(localStorage.eventKey);
 document.querySelector("#event_title").value="";
 document.querySelector("#event_desc").value="";
 document.querySelector(".modal").style.display = "none";
+
+fillEventsInTd();
 }
 
 //END OF createEventHandler
@@ -293,3 +295,23 @@ function editEventHandler(){
     document.querySelector(".modal_e").style.display = "none";    
 
 }//END logic of editEventHandler()
+
+//LOGIC removeEventHandler()
+function removeEventHandler(){
+    let eventKey = document.querySelector("#hold_event_key").textContent;
+    let copyEventList = JSON.parse(localStorage.eventList);
+    console.log(copyEventList);
+    let newEventList = [];
+
+    for (let i=0; i< copyEventList.length;i++){
+        console.log(copyEventList[i].eventKey);
+        if(eventKey !== copyEventList[i].eventKey ){
+            newEventList.push(copyEventList[i]);
+        }
+    }
+    console.log(newEventList);
+    localStorage.eventList = JSON.stringify(newEventList);
+    console.log(localStorage.eventList);
+    document.querySelector(".modal_e").style.display = "none";   
+}
+//END LOGIC removeEventHandler

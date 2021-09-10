@@ -11,4 +11,6 @@
 //     console.log("date not matched ... next trial please");
 // }
 console.log(document.querySelector(".contain_id").textContent);
-
+console.log(localStorage.eventList);
+localStorage.clear();
+console.log(localStorage);
