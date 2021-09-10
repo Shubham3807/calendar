@@ -69,6 +69,18 @@ fillDates(daysCnt);
 addDblEvent();
 
 fillEventsInTd();
+
+console.log(document.querySelectorAll(".td_event_title"));
+// document.querySelectorAll(".td_event_title").addEventListener(onclick,function(){
+//     alert("event listener added successfully");
+// });
+
+let event_titles = document.querySelectorAll(".td_event_title");
+for(let i =0 ; i< event_titles.length; i++){
+    event_titles[i].addEventListener("click",function(){
+            alert("event listener added successfully");
+        });
+}
 }//closeing of changeHandler
 
 //onClickClose handler
@@ -219,7 +231,7 @@ function fillEventsInTd(){
                 for(let k = 0; k< eventList.length; k++){
                     if(curDate === eventList[k].createdOn){
                         // countEvents++;
-                        trTd[i][j].innerHTML += "<td><br><span style='color : blue'><b>("+ eventList[k].title + ")</b></span></td>";
+                        trTd[i][j].innerHTML += "<td><p class='td_event_title'>"+ eventList[k].title.substr(0,10)+"..." + "</p></td>";
                     }
                  }
                     // if(countEvents){
@@ -232,3 +244,4 @@ function fillEventsInTd(){
     }
     
 }//END logic of fillEventsInTd()
+

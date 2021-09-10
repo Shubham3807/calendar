@@ -40,8 +40,8 @@ body{
 
 .tr_head td, .tr_body td{
     border : 1px solid rgb(10, 73, 10);
-    height:60px;
-    width:60px;
+    height:80px;
+    width:110px;
 
     text-align: center;
 }
@@ -53,6 +53,17 @@ body{
 td:first-child{
     color : red;
 }
+
+.td_event_title{
+    background-color: rgb(126, 195, 235);
+    font-size: small;
+    
+}
+.td_event_title:hover{
+    color: rgb(235, 19, 19);
+    text-decoration: underline;
+    cursor: pointer;
+  }
 
 /* end  */
 
