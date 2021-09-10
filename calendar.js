@@ -7,6 +7,8 @@ var firstDay = "";
 var selMonthNm = "";
 
 
+
+
 //logic to pre populate year selection with options & table rows with td
 window.onload = function(){
     console.log("test onload : success");
@@ -21,19 +23,17 @@ window.onload = function(){
     }
 
     var tbRows = document.querySelectorAll(".tr_body");
-    // console.log(tbRows);
     for(let i=0; i < tbRows.length; i++){
         for(let j=0; j<7; j++){
             let td = document.createElement("TD");
-            // console.log(i +" "+ j );
             tbRows[i].appendChild(td);
         }
     }
-
 }
 
 
-//onChangeHandler
+
+//--------------------------LOGIC onChangeHandler
 function selectHandler(selThis){
     if((selThis.getAttribute("name"))==="select_month"){
         selectedMonth = selThis.options[selThis.selectedIndex].value;
@@ -45,23 +45,19 @@ function selectHandler(selThis){
     firstDate = new Date(selectedYear,selectedMonth, "01"); 
     firstDay = firstDate.getDay();
     
-    
 //to find out current month name
     curMonthName();
 
-
 //to edit chart title - month name & year
     document.querySelector("#chart_header h3").textContent = selMonthNm + ", "+ selectedYear; 
-
     
 //to check whether the year is a leap year or not
- var febDays = (selectedYear % 4 === 0) ? 29 : 28;
+var febDays = (selectedYear % 4 === 0) ? 29 : 28;
 
- //to find days count 
- var daysCnt = daysCount(febDays);
+//to find days count 
+var daysCnt = daysCount(febDays);
 
- //to fill numbers in calendar
- 
+//to fill numbers in calendar 
 fillDates(daysCnt);
 
 //add dblclick event to each filled td
@@ -69,13 +65,15 @@ addDblEvent();
 
 fillEventsInTd();
 
-
 // to add edit modal with each event title
 modalToEvent();
 
-}//closeing of changeHandler
+}//-----------------------------LOGIC end of changeHandler
 
-//onClickClose handler
+
+
+
+//----------------------------- LOGIC onClickClose handler
 function onClickClose(clickThis){
     document.querySelector("#event_title").value="";
     document.querySelector("#event_desc").value="";
@@ -87,17 +85,17 @@ function onClickCloseE(clickThis){
     document.querySelector(".modal_e").style.display = "none";
 }
 
-// /////////////////////////////////////////////////////////////////
-// FUNCTIONS ARE CODED DOWN BELOW
 
-//logic to find current month name
+
+//---------------------------logic to find current month name
 function curMonthName(){
     var parts = (firstDate.toString()).split(" ",2);
     selMonthNm = parts[1];
-}//end curMonthName()
+}//----------------------------end curMonthName()
 
 
-//logic to find days count
+
+//--------------------------------logic to find days count
 function daysCount(febDays){
     var daysCnt = 0;
  if(firstDate.getMonth() == 1){
@@ -110,9 +108,11 @@ function daysCount(febDays){
      return daysCnt = 31;
  }
 
-}//end daysCount()
+}//-------------------------------------end daysCount()
 
-//logic to fill dates in calendar
+
+
+//------------------------------logic to fill dates in calendar
 function fillDates(daysCnt) {
     var tbRows = document.querySelectorAll(".tr_body");
     var cpFirstDay = firstDay;
@@ -143,9 +143,11 @@ function fillDates(daysCnt) {
            cpFirstDay = 0;
        }
     }
-   }//end fillDates()
+   }//------------------------------------end fillDates()
 
-//logic to add dblClick event to each filled td
+
+
+//---------------------------logic to add dblClick event to each filled td
 function addDblEvent(){
     var tbRows = document.querySelectorAll(".tr_body");
     var trTd = [];
@@ -165,25 +167,25 @@ function addDblEvent(){
             }
         }
     }
-}//logic end addDblEvent
+}//--------------------------------------logic end addDblEvent
 
-// LOGIC createEventHandler()
-
-// console.log(localStorage.length);
-// localStorage.clear();
-// console.log(localStorage.length);
- if(typeof(Storage) != "undefined"){
-     if(!localStorage.eventKey){
-        localStorage.eventKey = "0";
-        localStorage.setItem("eventList", "[]");
-     }
- }
+console.log(localStorage.length);
+localStorage.clear();
+console.log(localStorage.length);
+if(typeof(Storage) != "undefined"){
+    if(!localStorage.eventKey){
+       localStorage.eventKey = "0";
+       localStorage.setItem("eventList", "[]");
+    }
+}
 else{
-    alert("sorry! no support of localStorage.");
+   alert("sorry! no support of localStorage.");
 }
 
-function createEventHandler(){
 
+//------------------------------------- LOGIC createEventHandler()
+
+function createEventHandler(){
 var eventList = JSON.parse(localStorage.eventList);
 eventList[Number(localStorage.eventKey)] = {
     "eventKey" : localStorage.eventKey,
@@ -203,9 +205,11 @@ document.querySelector(".modal").style.display = "none";
 
 }
 
-//END OF createEventHandler
+//-----------------------------------END OF createEventHandler
 
-//LOGIC to fill events in each td
+
+
+//----------------------------------LOGIC to fill events in each td
 function fillEventsInTd(){
     // console.log("inside fillEventsInTd")
     var eventList = JSON.parse(localStorage.eventList);
@@ -221,26 +225,20 @@ function fillEventsInTd(){
         for(let j=0 ; j<trTd[i].length; j++ ){
             if(trTd[i][j].textContent !== ""){
                 let curDate = new Date(selectedYear, selectedMonth,trTd[i][j].textContent ).toLocaleDateString();
-                // console.log(curDate);
-                // let countEvents = 0;
                 for(let k = 0; k< eventList.length; k++){
                     if(curDate === eventList[k].createdOn){
-                        // countEvents++;
                         trTd[i][j].innerHTML += "<td><p class='td_event_title'>"+ eventList[k].title.substr(0,10)+"..." +"<b class='contain_key' style = 'display:none'>"+eventList[k].eventKey+"</b></p></td>";
                     }
                  }
-                    // if(countEvents){
-                    //     trTd[i][j].innerHTML += "<td><br><span style='color : blue'><b>("+ countEvents + ")</b></span></td>";
-                    // }
                 countEvents=0;
                 
             }
         }
     }
     
-}//END logic of fillEventsInTd()
+}//-----------------------------END logic of fillEventsInTd()
 
-//LOGIC modalToEvent()
+//------------------------------------LOGIC modalToEvent()
 function modalToEvent(){
     console.log(document.querySelectorAll(".td_event_title"));
 
@@ -266,9 +264,9 @@ function modalToEvent(){
                 }
             });
     }   
-}//END logic of modalToEvent
+}//--------------------------------------END logic of modalToEvent
 
-//LOGIC editEventHandler()
+//---------------------------------------LOGIC editEventHandler()
 function editEventHandler(){
     console.log("inside editEventHandler");
     let eventKey = document.querySelector("#hold_event_key").textContent;
@@ -289,9 +287,11 @@ function editEventHandler(){
     document.querySelector("#event_desc_e").value="";
     document.querySelector(".modal_e").style.display = "none";    
 
-}//END logic of editEventHandler()
+}//END----------------------- logic of editEventHandler()
 
-//LOGIC removeEventHandler()
+
+
+//LOGIC---------------------------- removeEventHandler()
 function removeEventHandler(){
     let eventKey = document.querySelector("#hold_event_key").textContent;
     let copyEventList = JSON.parse(localStorage.eventList);
@@ -299,4 +299,4 @@ function removeEventHandler(){
     localStorage.eventList = JSON.stringify(newEventList);
     document.querySelector(".modal_e").style.display = "none";   
 }
-//END LOGIC removeEventHandler
+//END---------------------------- LOGIC removeEventHandler
