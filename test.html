@@ -3,12 +3,21 @@
     <head>
         <meta name="description" content="implement js, css & html">
         <meta name="viewport" content="width = device-width, initial-scale = 1.0">
-        <link rel="stylesheet" href="./calendar.css">
+        <!-- <link rel="stylesheet" href="./calendar.css"> -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
+        <style>
+            .event_desc{
+                background-color: red;
+            }    
+            .contain_id{
+                color:greenyellow;
+                display: none;
+            }
+        </style>
     </head>
     <body>
        
-        <!-- select month & year -->
+        <!-- select month & year
         <select id="select_month" onchange="selectMonth(this);">
             <option value="0">Jan</option>
             <option value="01">Feb</option>
@@ -24,90 +33,13 @@
             <option value="11">Dec</option>
         </select>
 
-        <!-- year selection -->
-        <select name="" id="select_year" onchange = "selectYear(this);"></select>
+         year selection -->
+        <!-- <select name="" id="select_year" onchange = "selectYear(this);"></select> -->
 
         <!-- month chart -->
-        <div class="flex_container">
-            <div><h1>Sep, 2021</h1></div>
-            <table class="tb_month">
-                <thead class="tb_head">
-                    <tr class ="tr_head">
-                        <td>Mon</td>
-                        <td>Tue</td>
-                        <td>Wed</td>
-                        <td>Thu</td>
-                        <td>Fri</td>
-                        <td>Sat</td>
-                        <td>Sun</td>
-                    </tr>
-                </thead>
-                <tbody class="tb_body">
-                    <!-- row 1 -->
-                    <tr class=tr_body>
-                        <td>1</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <!-- row 2 -->
-                    <tr class=tr_body>
-                        <td></td>
-                        <td>2</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <!-- row  3-->
-                    <tr class=tr_body>
-                        <td>3</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <!-- row  4-->
-                    <tr class=tr_body>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>4</td>
-                    </tr>
-                    <!-- row  5-->
-                    <tr class=tr_body>
-                        <td></td>
-                        <td></td>
-                        <td>5</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <!-- row  6-->
-                    <tr class=tr_body>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>6</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div id="testStorage"></div>
-       
+    
+        <p class="event_desc">this is an event with id <b class="contain_id">1</b></p>
+        
         <!-- js script has been added  -->
         <script src= "./test.js"></script>
     </body>
