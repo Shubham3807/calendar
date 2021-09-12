@@ -42,7 +42,6 @@ body{
     border : 1px solid rgb(10, 73, 10);
     height:80px;
     width:110px;
-
     text-align: center;
 }
 
@@ -51,16 +50,18 @@ body{
 }
 
 td:first-child{
-    color : red;
+    color : rgb(206, 19, 19);
 }
 
 .td_event_title{
+    color:black;
     background-color: rgb(126, 195, 235);
     font-size: small;
     
 }
 .td_event_title:hover{
     color: rgb(235, 19, 19);
+    background-color: rgb(253, 236, 215);
     text-decoration: underline;
     cursor: pointer;
   }

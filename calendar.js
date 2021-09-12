@@ -1,11 +1,17 @@
+//programming demands precision and patience
 console.log("connection ok");
+// refresh localStorage 
+// console.log(localStorage.length);
+// localStorage.clear();
+// console.log(localStorage.length);
+
 //global variables
 var firstDate = new Date();
 var selectedMonth = firstDate.getMonth() ;
 var selectedYear = firstDate.getFullYear();
 var firstDay = "";
 var selMonthNm = "";
-
+var daysCountGlobal = 0;//to serve create and remove options
 
 
 
@@ -29,7 +35,37 @@ window.onload = function(){
             tbRows[i].appendChild(td);
         }
     }
+
+    firstDate = new Date(selectedYear,selectedMonth, "01"); 
+    firstDay = firstDate.getDay();
+    
+//to find out current month name
+    curMonthName();
+
+//to edit chart title - month name & year
+    document.querySelector("#chart_header h3").textContent = selMonthNm + ", "+ selectedYear; 
+    
+//to check whether the year is a leap year or not
+var febDays = (selectedYear % 4 === 0) ? 29 : 28;
+
+//to find days count 
+daysCountGlobal = daysCount(febDays);
+
+//fill dates in calendar...
+fillDates(daysCountGlobal);
+
+//add dblclick event to each filled td
+addDblEvent();//fillDates(daysCountGlobal) has been called it this function)
+
+if(localStorage.eventKey != 0){
+    fillEventsInTd();
 }
+
+// to add edit modal with each event title
+modalToEvent();
+
+}//end of window.onload
+
 
 
 
@@ -55,17 +91,17 @@ function selectHandler(selThis){
 var febDays = (selectedYear % 4 === 0) ? 29 : 28;
 
 //to find days count 
-var daysCnt = daysCount(febDays);
-daysCountGlobal = daysCnt;
-//to fill numbers in calendar 
-fillDates(daysCnt);
+daysCountGlobal = daysCount(febDays);
+
+//fill dates in calendar...
+fillDates(daysCountGlobal);
 
 //add dblclick event to each filled td
-addDblEvent();
+addDblEvent();//fillDates(daysCountGlobal) has been called it this function)
+
 if(localStorage.eventKey != 0){
     fillEventsInTd();
 }
-
 
 // to add edit modal with each event title
 modalToEvent();
@@ -80,12 +116,18 @@ function onClickClose(clickThis){
     document.querySelector("#event_title").value="";
     document.querySelector("#event_desc").value="";
     document.querySelector(".modal").style.display = "none";
+    fillDates(daysCountGlobal);
+    if(localStorage.eventKey != 0){
+        fillEventsInTd();
+    }
+
 }
 function onClickCloseE(clickThis){
     document.querySelector("#event_title").value="";
     document.querySelector("#event_desc").value="";
     document.querySelector(".modal_e").style.display = "none";
 }
+//--------------------------------end of onCLickClose handler
 
 
 
@@ -151,6 +193,7 @@ function fillDates(daysCnt) {
 
 //---------------------------logic to add dblClick event to each filled td
 function addDblEvent(){
+   
     var tbRows = document.querySelectorAll(".tr_body");
     var trTd = [];
     
@@ -162,6 +205,7 @@ function addDblEvent(){
         for(let j=0; j < trTd[i].length ; j++){
             if(trTd[i][j].textContent != ""){
                 trTd[i][j].addEventListener("dblclick",function(){
+                    fillDates(daysCountGlobal);
                     document.querySelector(".modal").style.display = "block";
                     document.querySelector(".hold_date").textContent = new Date( selectedYear,selectedMonth, trTd[i][j].textContent).toLocaleDateString();
                     console.log(document.querySelector(".hold_date").textContent); 
@@ -171,9 +215,7 @@ function addDblEvent(){
     }
 }//--------------------------------------logic end addDblEvent
 
-// console.log(localStorage.length);
-// localStorage.clear();
-// console.log(localStorage.length);
+
 if(typeof(Storage) != "undefined"){
     if(!localStorage.eventKey){
        localStorage.eventKey = "0";
@@ -196,13 +238,19 @@ eventList[Number(localStorage.eventKey)] = {
     "desc" : document.querySelector("#event_desc").value
 };
 
-localStorage.eventList = JSON.stringify(eventList);
-localStorage.eventKey = Number(localStorage.eventKey) + 1;
+if(eventList[Number(localStorage.eventKey)].title != "" && eventList[Number(localStorage.eventKey)].desc != "" ){
+    localStorage.eventList = JSON.stringify(eventList);
+    localStorage.eventKey = Number(localStorage.eventKey) + 1;
+}
+
 
 document.querySelector("#event_title").value="";
 document.querySelector("#event_desc").value="";
 document.querySelector(".modal").style.display = "none";
 
+fillDates(daysCountGlobal);
+fillEventsInTd();
+modalToEvent();
 }
 
 //-----------------------------------END OF createEventHandler
@@ -293,6 +341,12 @@ function removeEventHandler(){
     let newEventList = copyEventList.filter(i=>i.eventKey != eventKey);
     localStorage.eventList = JSON.stringify(newEventList);
     localStorage.eventKey = Number(localStorage.eventKey)-1;
-    document.querySelector(".modal_e").style.display = "none";   
+    document.querySelector(".modal_e").style.display = "none";
+    
+    fillDates(daysCountGlobal);
+    if(localStorage.eventKey != 0){
+        fillEventsInTd();
+    }
+    modalToEvent();
 }
 //END---------------------------- LOGIC removeEventHandler
