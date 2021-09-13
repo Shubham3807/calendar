@@ -1,21 +1,33 @@
 //programming demands precision and patience
 console.log("connection ok");
-// refresh localStorage 
+
+// ------------------------------LOGIC to handle localStorage
 // console.log(localStorage.length);
 // localStorage.clear();
 // console.log(localStorage.length);
+
+if(typeof(Storage) != "undefined"){
+    if(!localStorage.eventKey){
+       localStorage.eventKey = "0";
+       localStorage.setItem("eventList", "[]");
+    }
+}
+else{
+   alert("sorry! no support of localStorage.");
+}
+
 
 //global variables
 var firstDate = new Date();
 var selectedMonth = firstDate.getMonth() ;
 var selectedYear = firstDate.getFullYear();
-var firstDay = "";
 var selMonthNm = "";
-var daysCountGlobal = 0;//to serve create and remove options
+var firstDay = "";
+var daysCountGlobal = 0;
 
 
 
-//logic to pre populate year selection with options & table rows with td
+//to pre populate year selection with options & table rows with td
 window.onload = function(){
     console.log("test onload : success");
     var selectYr = document.getElementById("select_year");
@@ -41,13 +53,10 @@ window.onload = function(){
     
 //to find out current month name
     curMonthName();
-
 //to edit chart title - month name & year
     document.querySelector("#chart_header h3").textContent = selMonthNm + ", "+ selectedYear; 
     
-//to check whether the year is a leap year or not
 var febDays = (selectedYear % 4 === 0) ? 29 : 28;
-
 //to find days count 
 daysCountGlobal = daysCount(febDays);
 
@@ -55,21 +64,20 @@ daysCountGlobal = daysCount(febDays);
 fillDates(daysCountGlobal);
 
 //add dblclick event to each filled td
-addDblEvent();//fillDates(daysCountGlobal) has been called it this function)
+addDblEvent();
 
 if(localStorage.eventKey != 0){
     fillEventsInTd();
 }
-
 // to add edit modal with each event title
 modalToEvent();
 
-}//end of window.onload
+}//------------------------------------END of window.onload
 
 
 
-
-//--------------------------LOGIC onChangeHandler
+//--------------------------LOGIC selectHandler
+// to handle onChange event of year & month selection
 function selectHandler(selThis){
     if((selThis.getAttribute("name"))==="select_month"){
         selectedMonth = selThis.options[selThis.selectedIndex].value;
@@ -81,11 +89,10 @@ function selectHandler(selThis){
     firstDate = new Date(selectedYear,selectedMonth, "01"); 
     firstDay = firstDate.getDay();
     
-//to find out current month name
-    curMonthName();
+curMonthName();
 
 //to edit chart title - month name & year
-    document.querySelector("#chart_header h3").textContent = selMonthNm + ", "+ selectedYear; 
+ document.querySelector("#chart_header h3").textContent = selMonthNm + ", "+ selectedYear; 
     
 //to check whether the year is a leap year or not
 var febDays = (selectedYear % 4 === 0) ? 29 : 28;
@@ -97,49 +104,27 @@ daysCountGlobal = daysCount(febDays);
 fillDates(daysCountGlobal);
 
 //add dblclick event to each filled td
-addDblEvent();//fillDates(daysCountGlobal) has been called it this function)
+addDblEvent();
 
 if(localStorage.eventKey != 0){
     fillEventsInTd();
 }
 
-// to add edit modal with each event title
 modalToEvent();
 
-}//-----------------------------LOGIC end of changeHandler
+}//-----------------------------END selectHandler()
 
 
 
-
-//----------------------------- LOGIC onClickClose handler
-function onClickClose(clickThis){
-    document.querySelector("#event_title").value="";
-    document.querySelector("#event_desc").value="";
-    document.querySelector(".modal").style.display = "none";
-    fillDates(daysCountGlobal);
-    if(localStorage.eventKey != 0){
-        fillEventsInTd();
-    }
-
-}
-function onClickCloseE(clickThis){
-    document.querySelector("#event_title").value="";
-    document.querySelector("#event_desc").value="";
-    document.querySelector(".modal_e").style.display = "none";
-}
-//--------------------------------end of onCLickClose handler
-
-
-
-//---------------------------logic to find current month name
+//---------------------------LOGIC to find current month name
 function curMonthName(){
     var parts = (firstDate.toString()).split(" ",2);
     selMonthNm = parts[1];
-}//----------------------------end curMonthName()
+}//----------------------------END curMonthName()
 
 
 
-//--------------------------------logic to find days count
+//--------------------------------LOGIC to find days count
 function daysCount(febDays){
     var daysCnt = 0;
  if(firstDate.getMonth() == 1){
@@ -152,11 +137,11 @@ function daysCount(febDays){
      return daysCnt = 31;
  }
 
-}//-------------------------------------end daysCount()
+}//-------------------------------------END daysCount()
 
 
 
-//------------------------------logic to fill dates in calendar
+//------------------------------LOGIC to fill dates in calendar
 function fillDates(daysCnt) {
     var tbRows = document.querySelectorAll(".tr_body");
     var cpFirstDay = firstDay;
@@ -187,11 +172,11 @@ function fillDates(daysCnt) {
            cpFirstDay = 0;
        }
     }
-   }//------------------------------------end fillDates()
+   }//------------------------------------END fillDates()
 
 
 
-//---------------------------logic to add dblClick event to each filled td
+//---------------------------LOGIC to add dblclick event to each filled td
 function addDblEvent(){
    
     var tbRows = document.querySelectorAll(".tr_body");
@@ -213,18 +198,8 @@ function addDblEvent(){
             }
         }
     }
-}//--------------------------------------logic end addDblEvent
+}//------------------------------------- END addDblEvent()
 
-
-if(typeof(Storage) != "undefined"){
-    if(!localStorage.eventKey){
-       localStorage.eventKey = "0";
-       localStorage.setItem("eventList", "[]");
-    }
-}
-else{
-   alert("sorry! no support of localStorage.");
-}
 
 
 //------------------------------------- LOGIC createEventHandler()
@@ -253,7 +228,7 @@ fillEventsInTd();
 modalToEvent();
 }
 
-//-----------------------------------END OF createEventHandler
+//-----------------------------------END  createEventHandler()
 
 
 
@@ -281,9 +256,12 @@ function fillEventsInTd(){
         }
     }
     
-}//-----------------------------END logic of fillEventsInTd()
+}//-----------------------------END  fillEventsInTd()
+
+
 
 //------------------------------------LOGIC modalToEvent()
+//to add modal window containing edit & remove options to each event snippet in td
 function modalToEvent(){
     let event_titles = document.querySelectorAll(".td_event_title");
     for(let i =0 ; i< event_titles.length; i++){
@@ -309,6 +287,7 @@ function modalToEvent(){
     }   
 }//--------------------------------------END logic of modalToEvent
 
+
 //---------------------------------------LOGIC editEventHandler()
 function editEventHandler(){
     console.log("inside editEventHandler");
@@ -330,11 +309,11 @@ function editEventHandler(){
     document.querySelector("#event_desc_e").value="";
     document.querySelector(".modal_e").style.display = "none";    
 
-}//END----------------------- logic of editEventHandler()
+}//-------------------------END editEventHandler()
 
 
 
-//LOGIC---------------------------- removeEventHandler()
+//---------------------------LOGIC removeEventHandler()
 function removeEventHandler(){
     let eventKey = document.querySelector("#hold_event_key").textContent;
     let copyEventList = JSON.parse(localStorage.eventList);
@@ -349,4 +328,24 @@ function removeEventHandler(){
     }
     modalToEvent();
 }
-//END---------------------------- LOGIC removeEventHandler
+//---------------------------- END removeEventHandler
+
+
+//----------------------------- LOGIC onClickClose()
+//related to close options of modal windows
+function onClickClose(clickThis){
+    document.querySelector("#event_title").value="";
+    document.querySelector("#event_desc").value="";
+    document.querySelector(".modal").style.display = "none";
+    fillDates(daysCountGlobal);
+    if(localStorage.eventKey != 0){
+        fillEventsInTd();
+    }
+    modalToEvent();
+}
+function onClickCloseE(clickThis){
+    document.querySelector("#event_title").value="";
+    document.querySelector("#event_desc").value="";
+    document.querySelector(".modal_e").style.display = "none";
+}
+//--------------------------------END onCLickClose()
